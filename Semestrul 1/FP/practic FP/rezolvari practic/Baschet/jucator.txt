@@ -1,0 +1,9 @@
+Gediminas;Navikas;190;fundas
+Ana;Maria;150;fundas
+Niksa;Nikolic;192;fundas
+Ionut;Dragusin;220;pivot
+Ion;Ionel;200;pivot
+Paul;Graham;200;extrema
+Tudor;Dumitrescu;186;extrema
+Vlad;Vladut;300;extrema
+Viorel;Pop;235;fundas
