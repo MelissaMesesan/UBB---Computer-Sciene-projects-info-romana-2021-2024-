@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="438.0" prefWidth="276.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/previews/000/092/027/original/free-giraffe-print-vector.jpg&quot;);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socialnetwork.app.controllers.LoginInterfaceController">
+   <children>
+      <AnchorPane fx:id="loginPane" layoutX="18.0" layoutY="92.0" prefHeight="215.0" prefWidth="189.0" style="-fx-background-color: #f4ece4;">
+         <children>
+            <TextField fx:id="emailLoginTextField" layoutX="50.0" layoutY="95.0" promptText="Email" />
+            <Button fx:id="signInLoginButton" layoutX="50.0" layoutY="130.0" mnemonicParsing="false" onAction="#onSignInButtonActionLogin" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #663300;" text="Sign in" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="registerButton" layoutX="91.0" layoutY="165.0" onMouseClicked="#onSignUpButtonActionLogin" text="Sign up here" textAlignment="CENTER" textFill="#663300" />
+            <Label fx:id="titleLabel" alignment="CENTER" layoutX="2.0" layoutY="40.0" prefHeight="67.0" prefWidth="245.0" text="Giraffe's network" textAlignment="CENTER" textFill="#663300">
+               <font>
+                  <Font name="Bell MT" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="registerPane" prefHeight="400.0" prefWidth="286.0" visible="false">
+         <children>
+            <TextField fx:id="firstNameRegisterTextField" layoutX="68.0" layoutY="125.0" promptText="First name" />
+            <TextField fx:id="lastNameRegisterTextField" layoutX="68.0" layoutY="158.0" promptText="Last name" />
+            <TextField fx:id="emailRegisterTextField" layoutX="68.0" layoutY="195.0" promptText="Email" />
+            <Button fx:id="signUpRegisterButton" layoutX="68.0" layoutY="228.0" mnemonicParsing="false" onAction="#onSignUpButtonActionRegister" prefHeight="26.0" prefWidth="67.0" text="Sign up" />
+            <Button fx:id="loginRegisterButton" layoutX="151.0" layoutY="228.0" mnemonicParsing="false" onAction="#onSignInButtonActionRegister" prefHeight="26.0" prefWidth="67.0" text="Log in" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

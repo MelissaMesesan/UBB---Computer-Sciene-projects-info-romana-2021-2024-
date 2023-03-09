@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+
+<AnchorPane prefHeight="400.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socialnetwork.app.controllers.UsersFriendshipsController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="514.0">
+         <children>
+            <TableView fx:id="usersTableView" accessibleRole="IMAGE_VIEW" prefHeight="400.0" prefWidth="251.0">
+              <columns>
+                <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
+                  <TableColumn fx:id="emailColumn" prefWidth="97.33331298828125" text="Email" />
+              </columns>
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.9824561476707458" green="0.6434481143951416" blue="0.20012995600700378" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </TableView>
+            <TableView fx:id="friendshipsTableView" layoutX="254.0" prefHeight="400.0" prefWidth="260.0">
+              <columns>
+                <TableColumn fx:id="user1Column" prefWidth="98.66664123535156" text="User1" />
+                <TableColumn fx:id="user2Column" prefWidth="90.0" text="User2" />
+                  <TableColumn fx:id="sinceColumn" prefWidth="69.99996948242188" text="Since" />
+              </columns>
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="1.0" green="0.6213991641998291" blue="0.29012346267700195" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
