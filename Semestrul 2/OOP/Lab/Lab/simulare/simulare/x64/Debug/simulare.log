@@ -1,5 +1,0 @@
-﻿  FileRepository.cpp
-C:\Users\Meli\source\repos\test\test\FileRepository.cpp(25,9): error C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\Meli\source\repos\test\test\FileRepository.cpp(30,10): error C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  Ui.cpp
-  Generating Code...
