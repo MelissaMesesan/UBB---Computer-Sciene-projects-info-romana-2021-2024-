@@ -1,0 +1,21 @@
+[2022-03-31 16:26:56] [info] Start Program:
+Path:"C:\Users\Meli\source\repos\lab6_oop\x64\Debug\lab6_oop.exe"
+Arguments:
+Working directory: "C:\Users\Meli\source\repos\lab6_oop\lab6_oop\"
+Modules: Selected: C:\Users\Meli\source\repos\lab6_oop\x64\Debug\lab6_oop.exe Excluded: 
+Sources: Selected: C:\Users\Meli\Downloads\CPPPetStore\PetStore\PetStore C:\Users\Meli\source\repos\lab6_oop\lab6_oop Excluded: console 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: Binary C:\Users\Meli\AppData\Local\Temp\wtzo5ggq.k31 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2022-03-31 16:26:56] [info] Module: C:\Users\Meli\source\repos\lab6_oop\x64\Debug\lab6_oop.exe is selected because it matches selected pattern: C:\Users\Meli\source\repos\lab6_oop\x64\Debug\lab6_oop.exe
+[2022-03-31 16:26:58] [info] ----------------------------------------------------
+[2022-03-31 16:26:58] [info] Coverage binary generated in file: C:\Users\Meli\AppData\Local\Temp\wtzo5ggq.k31
+[2022-03-31 16:26:58] [info] ----------------------------------------------------
