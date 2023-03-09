@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1647365345 source:c:\users\meli\desktop\grafuri\lab2_grafuri\main.cpp
+	<iostream>
+	<fstream>
+
