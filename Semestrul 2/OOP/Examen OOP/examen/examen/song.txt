@@ -1,0 +1,44 @@
+1
+E ok
+Ana
+pop
+2
+bine e
+bianca
+rock
+3
+nu e
+carmen
+folk
+4
+aia e
+David
+disco
+5
+spre stele
+artist
+disco
+6
+in cer
+combo
+folk
+7
+departe
+maria
+pop
+8
+ce frumoasa esti
+David
+rock
+12
+al meu
+Meli
+rock
+34
+nu mai e ce a fost
+maria
+folk
+33
+hei
+abc
+pop
