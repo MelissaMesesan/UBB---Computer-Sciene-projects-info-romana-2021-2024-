@@ -1,0 +1,6 @@
+1,paine,alba,2.5
+2,unt de arahide,250g,55.5
+3,portocale,spania,10
+4,iaurt,grecesc,45.45
+6,apa minerala,borsec,35.5
+10,nutella,dulce,23

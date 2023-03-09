@@ -1,0 +1,5 @@
+﻿  gui.cpp
+  main.cpp
+  service.cpp
+C:\Users\Meli\source\repos\products1\products1\service.cpp(16): warning C4715: 'Store::Add': not all control paths return a value
+  products1.vcxproj -> C:\Users\Meli\source\repos\products1\x64\Debug\products1.exe
