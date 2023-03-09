@@ -1,0 +1,14 @@
+﻿  teoretic_4.cpp
+C:\Users\Meli\source\repos\teoretic_4\teoretic_4\teoretic_4.cpp(16,1): error C2440: 'return': cannot convert from 'Geanta<std::string> *' to 'Geanta<std::string>'
+C:\Users\Meli\source\repos\teoretic_4\teoretic_4\teoretic_4.cpp(16,1): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+C:\Users\Meli\source\repos\teoretic_4\teoretic_4\teoretic_4.cpp(14): message : while compiling class template member function 'Geanta<std::string> Geanta<std::string>::operator +(T)'
+          with
+          [
+              T=std::string
+          ]
+C:\Users\Meli\source\repos\teoretic_4\teoretic_4\teoretic_4.cpp(24): message : see reference to function template instantiation 'Geanta<std::string> Geanta<std::string>::operator +(T)' being compiled
+          with
+          [
+              T=std::string
+          ]
+C:\Users\Meli\source\repos\teoretic_4\teoretic_4\teoretic_4.cpp(23): message : see reference to class template instantiation 'Geanta<std::string>' being compiled
