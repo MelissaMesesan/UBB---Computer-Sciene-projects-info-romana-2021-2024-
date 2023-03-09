@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1654012327 source:c:\users\meli\desktop\grafuri\test_grafuri\main.cpp
+	<bits/stdc++.h>
+	<iostream>
+	<fstream>
+	<vector>
+	<Queue>
+
