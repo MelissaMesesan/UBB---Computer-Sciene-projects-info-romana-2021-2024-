@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socialnetwork.app.controllers.UsersFriendshipsController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="514.0">
+         <children>
+            <TableView fx:id="usersTableView" layoutX="6.0" prefHeight="400.0" prefWidth="227.0">
+              <columns>
+                <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
+                  <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
+              </columns>
+            </TableView>
+            <TableView fx:id="friendshipsTableView" layoutX="233.0" prefHeight="400.0" prefWidth="279.0">
+              <columns>
+                <TableColumn fx:id="user1Column" prefWidth="75.0" text="U1" />
+                <TableColumn fx:id="user2Column" prefWidth="75.0" text="U2" />
+                  <TableColumn fx:id="sinceColumn" prefWidth="75.0" text="Since" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

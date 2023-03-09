@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socialnetwork.app.controllers.LoginInterfaceController">
+   <children>
+      <AnchorPane fx:id="loginPane" prefHeight="400.0" prefWidth="286.0">
+         <children>
+            <TextField fx:id="emailLoginTextField" layoutX="68.0" layoutY="129.0" promptText="Email" />
+            <Button fx:id="signInLoginButton" layoutX="116.0" layoutY="164.0" mnemonicParsing="false" onAction="#onSignInButtonActionLogin" text="Sign in" textAlignment="CENTER" />
+            <Label fx:id="registerButton" layoutX="109.0" layoutY="197.0" onMouseClicked="#onSignUpButtonActionLogin" text="Sign up here" textAlignment="CENTER" textFill="#dc5959" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="registerPane" prefHeight="400.0" prefWidth="286.0" visible="false">
+         <children>
+            <TextField fx:id="firstNameRegisterTextField" layoutX="68.0" layoutY="125.0" promptText="First name" />
+            <TextField fx:id="lastNameRegisterTextField" layoutX="68.0" layoutY="158.0" promptText="Last name" />
+            <TextField fx:id="emailRegisterTextField" layoutX="68.0" layoutY="195.0" promptText="Email" />
+            <Button fx:id="signUpRegisterButton" layoutX="68.0" layoutY="228.0" mnemonicParsing="false" onAction="#onSignUpButtonActionRegister" prefHeight="26.0" prefWidth="67.0" text="Sign up" />
+            <Button fx:id="loginRegisterButton" layoutX="151.0" layoutY="228.0" mnemonicParsing="false" onAction="#onSignInButtonActionRegister" prefHeight="26.0" prefWidth="67.0" text="Log in" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="titleLabel" alignment="CENTER" layoutX="103.0" layoutY="33.0" text="HI6" textAlignment="CENTER">
+         <font>
+            <Font name="Ink Free" size="41.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.26893936774947436" startY="0.022727287176883583">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8421052694320679" green="0.3773879110813141" blue="0.3773879110813141" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5368421077728271" green="0.19883041083812714" blue="0.19883041083812714" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </children>
+</AnchorPane>
