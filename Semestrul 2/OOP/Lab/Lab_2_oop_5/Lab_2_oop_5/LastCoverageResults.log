@@ -1,0 +1,21 @@
+[2022-03-17 23:45:20] [info] Start Program:
+Path:"C:\Users\Meli\source\repos\Lab_2_oop_5\x64\Debug\Lab_2_oop_5.exe"
+Arguments:
+Working directory: "C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\"
+Modules: Selected: C:\Users\Meli\source\repos\Lab_2_oop_5\x64\Debug\Lab_2_oop_5.exe Excluded: 
+Sources: Selected: C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5 Excluded: ui 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: Binary C:\Users\Meli\AppData\Local\Temp\qgbs5hkw.rnh 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2022-03-17 23:45:21] [info] Module: C:\Users\Meli\source\repos\Lab_2_oop_5\x64\Debug\Lab_2_oop_5.exe is selected because it matches selected pattern: C:\Users\Meli\source\repos\Lab_2_oop_5\x64\Debug\Lab_2_oop_5.exe
+[2022-03-17 23:45:23] [info] ----------------------------------------------------
+[2022-03-17 23:45:23] [info] Coverage binary generated in file: C:\Users\Meli\AppData\Local\Temp\qgbs5hkw.rnh
+[2022-03-17 23:45:23] [info] ----------------------------------------------------

@@ -1,0 +1,19 @@
+﻿  Tranzactie.c
+  service.c
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(5,29): warning C4028: formal parameter 1 different from declaration
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(66,26): warning C4312: 'type cast': conversion from 'int' to 'Tranzactie *' of greater size
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(81,26): warning C4312: 'type cast': conversion from 'int' to 'Tranzactie *' of greater size
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(87,26): warning C4312: 'type cast': conversion from 'int' to 'Tranzactie *' of greater size
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(164,37): warning C4047: 'function': 'int' differs in levels of indirection from 'ListaTranzactii *'
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(164,33): warning C4024: 'creeareService': different types for formal and actual parameter 1
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(171,2): warning C4311: 'type cast': pointer truncation from 'Tranzactie *' to 'int'
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(173,2): warning C4311: 'type cast': pointer truncation from 'Tranzactie *' to 'int'
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(175,2): warning C4311: 'type cast': pointer truncation from 'Tranzactie *' to 'int'
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\service.c(177,2): warning C4311: 'type cast': pointer truncation from 'Tranzactie *' to 'int'
+  ui.c
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\ui.c(53,54): warning C4311: 'type cast': pointer truncation from 'Tranzactie *' to 'int'
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\ui.c(79,95): warning C4311: 'type cast': pointer truncation from 'Tranzactie *' to 'int'
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\ui.c(119,45): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[50]'
+C:\Users\Meli\source\repos\Lab_2_oop_5\Lab_2_oop_5\ui.c(119,38): warning C4024: 'sortare': different types for formal and actual parameter 2
+  Generating Code...
+  Lab_2_oop_5.vcxproj -> C:\Users\Meli\source\repos\Lab_2_oop_5\x64\Debug\Lab_2_oop_5.exe
