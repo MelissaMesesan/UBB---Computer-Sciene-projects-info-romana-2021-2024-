@@ -1,0 +1,22 @@
+%Domeniu:
+%list = integer*
+
+%Predicate:
+%add_impar(list, integre, integer, integer, list)
+%add(list, integer, list)
+
+addElement(X, [], [X]).
+addElement(X, [Y | Rest], [X,Y | Rest]) :- X @< Y, !.
+addElement(X, [Y | Rest1], [Y | Rest2]) :- addElement(X, Rest1, Rest2).
+
+
+add_impar([],_,_,_,[]).
+add_impar([H|T],E,LastGoodPoz,CurrPoz,Lrez):-CurrPoz is 2*LastGoodPoz + 1,
+				             UrmPoz is CurrPoz + 1,
+	                                     add_impar(T,E,CurrPoz,UrmPoz,Lrez2),
+					     addElement([H,E],Lrez2,Lrez).
+add_impar([H|T],E,LastGoodPoz,CurrPoz,Lrez):-CurrPoz \= 2*LastGoodPoz + 1,
+				             UrmPoz is CurrPoz + 1,
+	                                     add_impar(T,E,LastGoodPoz,UrmPoz,Lrez2),
+					     addElement([H],Lrez2,Lrez).
+add(L,E,Lrez):-add_impar(L,E,0,1,Lrez).
