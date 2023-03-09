@@ -1,0 +1,46 @@
+﻿  MyList.c
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\MyList.c(21,9): warning C4101: 'l': unreferenced local variable
+  service.c
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\service.c(9,28): warning C4028: formal parameter 1 different from declaration
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\service.c(9,44): warning C4028: formal parameter 3 different from declaration
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\service.c(9,83): warning C4029: declared formal parameter list different from definition
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\service.c(10,53): warning C4047: 'function': 'char' differs in levels of indirection from 'char *'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\service.c(10,49): warning C4024: 'createTransaction': different types for formal and actual parameter 3
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\service.c(10,66): warning C4047: 'function': 'char' differs in levels of indirection from 'char *'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\service.c(10,55): warning C4024: 'createTransaction': different types for formal and actual parameter 4
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\service.c(11,22): warning C4013: 'valideaza' undefined; assuming extern returning int
+  tranzactie.c
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.c(16,35): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.c(16,24): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.c(15,2): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.c(16,2): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.c(21,5): error C2371: 'getDay': redefinition; different basic types
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.h(18): message : see declaration of 'getDay'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.c(26,5): error C2371: 'getAmount': redefinition; different basic types
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.h(25): message : see declaration of 'getAmount'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.c(44,2): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\tranzactie.c(50,2): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  ui.c
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(27,10): warning C4473: 'scanf_s' : not enough arguments passed for format string
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(27,10): message : placeholders and their parameters expect 2 variadic arguments, but 1 were provided
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(27,10): message : the missing variadic argument 2 is required by format string '%s'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(27,10): message : this argument is used as a buffer size
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(30,10): warning C4473: 'scanf_s' : not enough arguments passed for format string
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(30,10): message : placeholders and their parameters expect 2 variadic arguments, but 1 were provided
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(30,10): message : the missing variadic argument 2 is required by format string '%s'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(30,10): message : this argument is used as a buffer size
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(31,30): warning C4047: 'function': 'int' differs in levels of indirection from 'MyList *'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(31,29): warning C4024: 'addTransaction': different types for formal and actual parameter 1
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(31,43): warning C4047: 'function': 'char *' differs in levels of indirection from 'int'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(31,37): warning C4024: 'addTransaction': different types for formal and actual parameter 3
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(31,49): warning C4047: 'function': 'char *' differs in levels of indirection from 'char'
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(31,45): warning C4024: 'addTransaction': different types for formal and actual parameter 4
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(31,51): warning C4020: 'addTransaction': too many actual parameters
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(48,4): warning C4033: 'run' must return a value
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(50,4): warning C4033: 'run' must return a value
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(52,4): warning C4033: 'run' must return a value
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(54,4): warning C4033: 'run' must return a value
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(56,4): warning C4033: 'run' must return a value
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(58,4): warning C4033: 'run' must return a value
+  Generating Code...
+C:\Users\Meli\source\repos\lab 2_oop\lab 2_oop\ui.c(62): warning C4716: 'run': must return a value
