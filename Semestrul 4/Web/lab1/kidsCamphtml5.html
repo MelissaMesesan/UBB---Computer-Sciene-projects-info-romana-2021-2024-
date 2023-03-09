@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <title>Lab1</title>
+</head>
+
+<body>
+<!--Container    -->
+<div>
+    <div>
+        <!--Header-->
+        <div>
+            <h1>Form Summer Camp for Kids <br> HTML 5</h1>
+        </div>
+        <!--Body-->
+        <div>
+            <img src="https://cmpreschool.com/wp-content/uploads/2021/07/Summer-camps-2024-0319.jpg"
+                 alt="camp image" width="725" height="307">
+            <br>
+            <form action="noError.php" method="POST">
+                <table>
+                    <tr>
+                        <th colspan="2">Registration to the summer camp</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <th rowspan="1">This summer we are focussing on:</th>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                Learning
+                                                <ol type="i">
+                                                    <li>Math classes</li>
+                                                    <li>Music classes</li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                Activities
+                                                <ol type="a">
+                                                    <li>Horsing</li>
+                                                    <li>Sowing</li>
+                                                </ol>
+                                            </li>
+                                            <li>Making new friends</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                You need a suitcase <br> that contains:
+                                                <ol type="1">
+                                                    <li>Clothes for warm and cold weather</li>
+                                                    <li>The hygiene products</li>
+                                                    <li>Swim suit</li>
+                                                    <li>Good attitude</li>
+                                                </ol>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Select the internship</strong></td>
+                        <td>
+                            <input type="checkbox" name="season" id="june" value="June">
+                            <label for="june">June</label>
+                            <input type="checkbox" name="season" id="july" value="July">
+                            <label for="july">July</label>
+                            <input type="checkbox" name="season" id="august" value="August">
+                            <label for="august">August</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">About the participant</th>
+                    </tr>
+                    <tr>
+                        <td><label for="nume"><strong>Last Name</strong></label></td>
+                        <td><input id="nume" type="text" name="nume"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="prenume"><strong>First Name</strong></label></td>
+                        <td><input id="prenume" type="text" name="nume"></td>
+                    </tr>
+                    <tr>
+                        <td><label><strong>Sex</strong></label></td>
+                        <td rowspan="1">
+                            <label for="sex-m">M</label>
+                            <input type="radio" name="sex" id="sex-m" value="m">
+                            <label for="sex-f">F</label>
+                            <input type="radio" name="sex" id="sex-f" value="f" checked="checked">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="data-nastere"><strong>Date of birth</strong></label></td>
+                        <td><input id="data-nastere" type="text" name="data-nastere"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="adresa"><strong>Adress</strong></label></td>
+                        <td><input id="adresa" type="text" name="adresa"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email"><b>Email</b></label></td>
+                        <td><input id="email" type="text" name="email"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="judet"><strong>State</strong></label></td>
+                        <td><input id="judet" type="text" name="judet" maxlength="2"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="alergii"><strong>Allergies</strong></label></td>
+                        <td><input id="alergii" type="text" name="alergii"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <fieldset>
+                                <legend>Secret key that you recived on email</legend>
+                                <label>Type here:</label>
+                                <input type="password">
+                            </fieldset>
+                            <fieldset>
+                                <legend>Choose where you want to stay:</legend>
+                                <!--Table in table-->
+                                <table>
+                                    <tr>
+                                        <td>Select university</td>
+                                        <td>
+                                            <select>
+                                                <option>Cottage A</option>
+                                                <option>Cottage B</option>
+                                                <option>Black Cottage</option>
+                                                <option>Summer Cottage</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="roomates"></label>Number of roommates</td>
+                                        <td><input type="text" name="roomates" id="roomates" maxlength="1" size="1">
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notes:</strong></td>
+                        <td><textarea name="notes" rows="3" cols="50"> </textarea></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">* If you want to complete the form in Romanian, please use the following
+                            letters:
+                            &#x0103;, &icirc;, &acirc;, &#x021b;, &#x0219;.
+                        </th>
+                    </tr>
+                </table>
+                <span><input type="submit" value="Submit"></span>
+            </form>
+        </div>
+        <footer>
+                  <h2><i><a href="https://www.scs.ubbcluj.ro/~mmir3161/kidsCamphtml4.html" target="_blank">Go to html4</a></i></h2>
+        </footer>
+    </div>
+</div>
+</body>
+
+</html>
