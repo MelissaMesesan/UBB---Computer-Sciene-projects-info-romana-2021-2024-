@@ -1,0 +1,4 @@
+Stau;Maria Maria;jazz;2001-01-12
+Plang;Ana Maria;jazz;2001-08-13
+Dans;David;pop;2009-08-20
+Dor;Meli;altele;2018-04-27

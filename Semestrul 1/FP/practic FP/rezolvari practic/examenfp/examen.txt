@@ -1,0 +1,10 @@
+12.12;12:00;FP;restanta
+26.01;12:00;ASC;normala
+28.01;11:00;FP;normala
+27.01;13:00;PS;normala
+13.02;13:00;MAP;normala
+14.02;16:00;fp;restanta
+26.01;12:30;Analiza;normala
+24.08;14:00;ASC;normala
+14.02;14:00;FP;restanta
+12.12;12:00;ASC;normala

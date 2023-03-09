@@ -1,0 +1,2 @@
+12.12;12:00;FP;restanta
+14.02;16:00;fp;restanta

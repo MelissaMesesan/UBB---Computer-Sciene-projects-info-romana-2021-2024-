@@ -1,0 +1,8 @@
+Plang;Ana Maria;pop;2000-01-01
+Stau;Maria Maria;jazz;2001-01-12
+Dor;Meli;altele;2018-04-27
+Dans;David;pop;2009-08-20
+Somn;Dorel;altele;2015-02-16
+Somn;Marius;altele;2018-10-23
+Zi;Davidel;rock;2008-07-24
+Aa;bb;jazz;2002-11-11
