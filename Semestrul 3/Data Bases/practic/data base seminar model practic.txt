@@ -1,0 +1,107 @@
+–Creați o bază de date pentru gestiunea mersului trenurilor. Baza de date va conține informații despre rutele tuturor trenurilor.
+–Entitățile de interes pentru domeniul problemei sunt: trenuri, tipuri de tren, stații și rute.
+–Fiecare tren are un nume și aparține unui tip. Tipul trenului are o descriere.
+–Fiecare rută are un nume, un tren asociat și o listă de stații cu ora sosirii și ora plecării pentru fiecare stație. Ora sosirii și ora plecării sunt reprezentate ca perechi oră/minut (exemplu: trenul ajunge la 5 PM și pleacă la 5:10 PM). Stația are un nume.
+
+–1) Scrieți un script SQL care creează un model relațional pentru a reprezenta datele. (4 puncte)
+–2) Creați o procedură stocată care primește o rută, o stație, ora sosirii, ora plecării și adaugă noua stație rutei. Dacă stația există deja, se actualizează ora sosirii și ora plecării. (3 puncte)
+–3) Creați un view care afișează numele rutelor care conțin toate stațiile. (2 puncte)
+–Oficiu - 1 punct
+
+
+--CREATE DATABASE Trains
+GO
+USE Trains
+ 
+CREATE TABLE TipuriDeTrenuri
+(id_tip INT PRIMARY KEY IDENTITY,
+descriere varchar(100)
+);
+ 
+CREATE TABLE Trenuri
+(id_tren INT PRIMARY KEY IDENTITY,
+nume varchar(20),
+id_tip INT FOREIGN KEY REFERENCES TipuriDeTrenuri(id_tip)
+);
+ 
+CREATE TABLE Rute
+(id_ruta INT PRIMARY KEY IDENTITY,
+nume_ruta varchar(20),
+id_tren INT FOREIGN KEY REFERENCES Trenuri(id_tren)
+);
+ 
+CREATE TABLE Statii
+(id_statie INT PRIMARY KEY IDENTITY,
+nume varchar(20),
+);
+ 
+CREATE TABLE RuteStatii
+(id_statie INT,
+id_ruta INT,
+ora_sosirii TIME,
+ora_plecarii TIME,
+CONSTRAINT fk_RuteStatii_Statii FOREIGN KEY (id_statie) REFERENCES Statii(id_statie),
+CONSTRAINT fk_RuteStatii_Rute FOREIGN KEY (id_ruta) REFERENCES Rute(id_ruta),
+CONSTRAINT pk_RuteStatii PRIMARY KEY (id_statie, id_ruta)
+);
+
+
+INSERT INTO TipuriDeTrenuri VALUES ('InterRegio'),('Regio'),('International'),('RegioExpress'),('Personal');
+ 
+INSERT INTO Trenuri VALUES ('TrenuletulThomas',5),('Tren1',3),('Tren2',1),('Tren3',4),('Tren4',1)
+ 
+INSERT INTO Rute VALUES ('Cluj-Sibiu', 1),('Cluj-BaiaMare', 4),('Bistria-Sibiu', 3),('Cluj-Bistrita', 2)
+ 
+INSERT INTO Statii VALUES ('Cluj'),('Sibiu'),('BaiaMare'),('Bistrita');
+ 
+INSERT INTO RuteStatii VALUES (1,1,'10:30','10:45'),(1,2,'14:30','14:45'),(2,1,'10:50','10:55'),(2,2,'12:30','12:45'),
+(3,4,'11:10','11:12'),(3,2,'19:10','19:20'),(4,1,'17:10','17:12'),(4,4,'20:10','20:15');
+
+--PROCEDURI
+
+go
+CREATE PROCEDURE AdaugaRuteStatii 
+    @numeStatie varchar(20),
+    @numeRuta varchar(20),
+    @oraPlecarii time,
+    @oraSosirii time
+as
+begin
+    DECLARE @idStatie int
+    DECLARE @idRuta int
+ 
+    SET @idStatie = 0
+    SET @idRuta = 0
+ 
+    SELECT TOP 1 @idStatie = id_statie from Statii where nume = @numeStatie
+    SELECT TOP 1 @idRuta = id_ruta from Rute where nume = @numeRuta
+ 
+    IF (exists (SELECT * FROM RuteStatii WHERE id_statie = @idStatie and id_ruta = @idRuta))
+    BEGIN
+        UPDATE RuteStatii SET ora_sosirii = @oraSosirii, ora_plecarii = @oraPlecarii WHERE id_statie = @idStatie and id_ruta = @idRuta
+    END
+    ELSE
+        INSERT INTO RuteStatii (id_statie, id_ruta, ora_sosirii, ora_plecarii)
+        VALUES (@idStatie, @idRuta, @oraSosirii, @oraPlecarii)
+end
+ 
+go
+select * from Rute
+select * from Statii
+select * from RuteStatii
+exec AdaugaRuteStatii 'Bistrita', 'Cluj-Sibiu', '11:40', '11:50'
+exec AdaugaRuteStatii 'Bistrita', 'Cluj-Sibiu', '11:50', '11:40'
+
+--VIEW
+
+CREATE VIEW viewRute AS
+SELECT nume_ruta
+FROM Rute R
+INNER JOIN RuteStatii RS
+ON R.id_ruta = RS.id_ruta
+GROUP BY R.id_ruta, R.nume_ruta
+HAVING COUNT(*) = (SELECT COUNT(*) FROM Statii)
+
+ 
+
+SELECT * FROM viewRute

@@ -1,0 +1,147 @@
+use library
+go
+
+/*create table Librarii(
+	idLib int primary key identity,
+	nume varchar(50),
+	adresa varchar(50)
+	)
+
+create table Domenii(
+	idDom int primary key identity,
+	descriere varchar(50)
+	)
+
+create table Autori(
+	idAutor int primary key identity,
+	nume varchar(50)
+	)
+
+create table Carti(
+	idCarte int primary key identity,
+	titlu varchar(50),
+	idDom int foreign key references Domenii(idDom)
+)
+
+create table Achizitii(
+	idLib int references Librarii(idLib),
+	idCarte int references Carti(idCarte),
+	primary key(idLib, idCarte),
+	dataAch date)
+
+create table Realizari(
+	idCarte int references Carti(idCarte),
+	idAutor int references Autori(idAutor),
+	primary key(idCarte, idAutor)
+	)*/
+
+create or alter procedure addAuthor
+	@nume varchar(50),
+	@titlu varchar(50)
+as
+begin
+	
+	declare @idAuthor int =(select idAutor from Autori where nume=@nume)
+	declare @idBook int =(select idCarte from Carti where titlu=@titlu)
+	if @idAuthor is null
+	begin
+		insert into Autori values(@nume)
+		declare @iddAuth int= (select top 1 idAutor from Autori order by idAutor desc)
+		insert into Realizari values(@idBook, @iddAuth)
+		print 'added author and contribution'
+	end
+	else
+	begin
+
+		if  exists (select * from Realizari where idCarte=@idBook and idAutor=@idAuthor)
+		begin
+			print 'contribution alr exists'
+			
+			
+		end
+		else
+		begin
+			insert into Realizari values(@idBook, @idAuthor)
+			print 'added succesfully'
+		end
+		
+	end
+
+end
+
+insert into Domenii values('isto')
+insert into Domenii values('literatura')
+insert into Domenii values('psihologie')
+insert into Domenii values('comedie')
+insert into Domenii values('fictiune')
+
+
+
+insert into Carti values('sadsad', 1)
+insert into Carti values('ion', 2)
+insert into Carti values('o scrs pierd', 4)
+insert into Carti values('monte cristo', 2)
+insert into Carti values('hobbitul', 5)
+
+insert into Autori values('Dan Badea')
+insert into Autori values('Liv Rebreanu')
+insert into Autori values('Dan Dan')
+insert into Autori values('Mircea Eliade')
+insert into Autori values('George Bacovia')
+insert into Autori values('Mara Bladea')
+
+insert into Librarii values('libraria1', 'fagului 23')
+insert into Librarii values('libraria2', 'somesului 25')
+insert into Librarii values('libraria3', 'piata unirii 44')
+insert into Librarii values('libraria4', 'eroilor 56')
+insert into Librarii values('libraria5', 'aviatorilor 29')
+
+insert into Achizitii values(1,1, '2020-05-09')
+insert into Achizitii values(2,2, '2022-07-09')
+insert into Achizitii values(3,3, '2023-01-09')
+insert into Achizitii values(4,4, '2021-08-20')
+insert into Achizitii values(5,5, '2020-05-09')
+
+insert into Realizari values(2,2)
+
+exec addAuthor 'Liv Rebreanu', 'ion'
+exec addAuthor 'bonbon', 'ion'
+select * from Autori
+select * from Realizari
+
+create or alter view viewBooks
+as
+select count(*) as 'number of books' from Carti c
+inner join Achizitii a on a.idCarte=c.idCarte
+where a.dataAch>='2010-01-01'
+group by a.idLib
+
+select * from viewBooks
+
+
+create or alter function howManyAuthors(@titlu varchar(50))
+returns int
+as
+begin
+declare @howm int=(select count(r.idAutor) from Realizari r
+inner join Carti c on c.idCarte=r.idCarte
+where c.titlu=@titlu)
+return @howm
+end
+
+
+
+create or alter function vwlist(@nrAutori int)
+returns table
+as
+return select distinct l.nume, l.adresa, c.titlu, @nrAutori as 'NrAutori' from Librarii l
+inner join Achizitii a on a.idLib=l.idLib
+inner join Carti c on a.idCarte=c.idCarte
+inner join Realizari r on r.idCarte=c.idCarte
+where [dbo].howManyAuthors(c.titlu)=@nrAutori
+
+select * from [dbo].vwlist(3)
+
+insert into Realizari values(2, 4)
+insert into Realizari values(1, 3)
+insert into Realizari values(1, 5)

@@ -1,0 +1,146 @@
+use cops
+go
+
+create table Stations(
+	idStation int primary key identity,
+	sName varchar(50),
+	adress varchar(50)
+	)
+
+create table Grades(
+	idGrade int primary key identity,
+	gName varchar(50),
+	)
+
+create table Sectors(
+	idSector int primary key identity,
+	sectorName varchar(50)
+	)
+
+create table Officers(
+	idOfficer int primary key identity,
+	firstName varchar(50),
+	lastName varchar(50),
+	idStation int foreign key references Stations(idStation),
+	idGrade int foreign key references Grades(idGrade)
+)
+
+drop table Patrols 
+
+
+create table Patrols(
+	idPatrol int primary key identity,
+	idOfficer int foreign key references Officers(idOfficer),
+	idSector int foreign key references Sectors(idSector),
+	entryTime datetime,
+	offTime datetime
+	)
+
+
+insert into Sectors values('sector 1')
+insert into Sectors values('sector 2')
+insert into Sectors values('sector 3')
+insert into Sectors values('sector 4')
+insert into Sectors values('sector 5')
+
+insert into Grades values('officer')
+insert into Grades values('sheriff')
+insert into Grades values('detective')
+insert into Grades values('swat')
+
+insert into Stations values('station 1', 'asdsad')
+insert into Stations values('station 2', 'asdsad')
+insert into Stations values('station 3', 'asdsad')
+insert into Stations values('station 4', 'asdsad')
+insert into Stations values('station 5', 'asdsad')
+
+insert into Officers values('Bob', 'Bob',1,1)
+insert into Officers values('George', 'Bobert', 2,2)
+insert into Officers values('John', 'Wick', 3,3)
+insert into Officers values('Bobish', 'Zack', 4,4)
+
+insert into Patrols values(1,1,'2022-09-09 00:00:00', '2022-09-09 12:00:00')
+insert into Patrols values(2,2,'2022-05-05 10:30:00', '2022-05-05 12:00:00')
+insert into Patrols values(3,3,'2022-09-09 00:00:00', '2022-09-09 12:00:00')
+insert into Patrols values(4,4,'2022-10-10 00:00:00', '2022-10-10 04:30:00')
+
+create or alter procedure schedule
+	@firstName varchar(50), @lastName varchar(50),
+	@sectorName varchar(50),
+	@entry datetime,
+	@exit datetime
+as
+begin
+	if exists(select * from Patrols p inner join Officers o on o.idOfficer=p.idOfficer
+		where p.entryTime=@entry and o.firstName=@firstName and o.lastName=@lastName)
+	begin
+		update Patrols set offTime=@exit where entryTime=@entry
+		
+	end
+	else
+	begin
+		declare @idS int=(select idSector from Sectors where sectorName=@sectorName)
+		declare @idP int=(select idOfficer from Officers o where o.firstName=@firstName and o.lastName=@lastName)
+		insert into Patrols values(@idP, @idS, @entry, @exit)
+		print 'added succesfully'
+
+	end
+
+
+end
+
+exec schedule 'Bob', 'Bob', 'sector 3', '2022-10-10 00:00:00', '2022-10-10 04:30:00'
+
+
+create or alter view ex3 as
+	select top (select count(*) from Patrols) pr.idOfficer, pl.firstName, pl.lastName, s.sName, sum(DATEDIFF(hour, entryTime, offTime)) as NrOreLucrate
+	from Patrols pr inner join Officers pl on pr.idOfficer=pl.idOfficer
+	inner join Stations s on pl.idStation=s.idStation
+	where month(entryTime)=1 and year(entryTime)=year(getdate())
+	group by pr.idOfficer, firstName, lastName, s.sName
+	order by s.sName, pl.firstName, pl.lastName asc
+
+
+
+insert into Patrols values(1,5,'2023-01-01 00:00:00', '2023-01-01 04:30:00')
+insert into Patrols values(1,1,'2023-01-01 00:00:00', '2023-01-01 04:30:00')
+insert into Patrols values(2,1,'2023-01-01 00:00:00', '2023-01-01 04:30:00')
+insert into Patrols values(2,2,'2023-01-01 00:00:00', '2023-01-01 04:30:00')
+insert into Patrols values(2,3,'2023-01-01 00:00:00', '2023-01-01 04:30:00')
+
+
+select * from ex3
+
+create or alter function ff4(@entry datetime, @firstName varchar(50), @lastName varchar(50))
+	returns int
+as
+begin
+	declare @howm int =(select count(idSector) as 'Sectors' from Patrols p 
+	inner join Officers o on o.idOfficer=p.idOfficer
+	where o.firstName=@firstName and o.lastName=@lastName
+	and p.entryTime=@entry)
+	return @howm
+end
+
+
+create or alter function f4(@entry datetime)
+	returns table
+as
+	return select distinct o.firstName, o.lastName, [dbo].ff4(@entry, o.firstName, o.lastName) as 'number of patrols'
+	from Officers o
+	inner join Patrols p on p.idOfficer=o.idOfficer
+	where p.entryTime=@entry and [dbo].ff4(@entry, o.firstName, o.lastName)>1
+
+select * from [dbo].f4('2023-01-01 00:00:00')
+
+
+create or alter function fff4(@entry datetime)
+	returns table
+as
+	return select distinct o.firstName, o.lastName, count(p.idSector) as 'number of patrols' from Officers o 
+	inner join Patrols p on o.idOfficer=p.idOfficer
+	where p.entryTime=@entry 
+	group by o.firstName, o.lastName
+	having count(p.idSector)>1
+
+select * from [dbo].fff4('2023-01-01 00:00:00')
