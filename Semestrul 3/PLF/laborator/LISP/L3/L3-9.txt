@@ -1,0 +1,20 @@
+;9.  Definiti o functie care substituie un element E prin elementele
+;    unei liste L1 la toate nivelurile unei liste date L.
+
+; l - lista
+; elem - elementul pe care vreau sa il inlocuiesc
+; p - lista cu care inlocuiesc elem
+
+; mySubstitute(l, elem, p) =
+; = l , daca l != elem si l e atom
+; = p , daca l = elem si l e atom
+; = mySubstitute(l1, elem, p) U mySubstitute(l2, elem, p) U ... U mySubstitute(ln, elem, p), daca l=(l1...ln)
+
+
+(defun mySubstitute(l elem p)
+  (cond
+    ((and (not (equal l elem)) (atom l))  l)
+    ((and (equal l elem) (atom l)) p)
+    (t (mapcar #' (lambda (l) (mySubstitute l elem p)) l))
+  )
+)

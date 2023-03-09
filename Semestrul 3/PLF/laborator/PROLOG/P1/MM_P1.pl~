@@ -1,0 +1,11 @@
+maxim([],-99999).
+maxim([H|T],H) :- maxim(T,M) , H > M , !.
+maxim([_|T],M) :- maxim(T,M).
+
+
+toate([],[],_,_).
+toate([H|T],[Poz|R],M,Poz) :- H =:= M , Poz2 is Poz + 1 , toate(T,R,M,Poz2).
+toate([H|T],R,M,Poz) :- H =\= M , Poz2 is Poz + 1 , toate(T,R,M,Poz2).
+
+
+poz_max(L,R) :- maxim(L,M) , toate(L,R,M,1).
