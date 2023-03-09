@@ -1,0 +1,43 @@
+     1                                  bits 32
+     2                                  
+     3                                  global start        
+     4                                  
+     5                                  extern exit, printf, scanf          
+     6                                  import exit msvcrt.dll    
+     7                                  import printf msvcrt.dll    
+     8                                  import scanf msvcrt.dll     
+     9                                                            
+    10                                  segment data use32 class=data
+    11                                  
+    12                                      ;Sa se citeasca de la tastatura un numar in baza 10 
+    13                                      ;si sa se afiseze valoarea acelui numar in baza 16
+    14                                  
+    15 00000000 00000000                	n dd  0                     
+    16 00000004 6E3D00                  	message  db "n=", 0  
+    17 00000007 256400                  	format  db "%d", 0          ; %d <=> un numar decimal (baza 10)
+    18                                      
+    19 0000000A 6E3D257800                  message_format db "n=%x", 0 ; %d <=> un numar hexadecimal (baza 16)
+    20                                      
+    21                                  segment code use32 class=code
+    22                                      start:
+    23                                         
+    24                                          ;printf(message)
+    25 00000000 68[04000000]                    push dword message 
+    26 00000005 FF15[00000000]                  call [printf]      
+    27 0000000B 83C404                          add esp, 4*1       
+    28                                                                                     
+    29                                          ;scanf(format, n)
+    30 0000000E 68[00000000]                    push dword n       
+    31 00000013 68[07000000]                    push dword format
+    32 00000018 FF15[00000000]                  call [scanf]       
+    33 0000001E 83C408                          add esp, 4 * 2     
+    34                                          
+    35                                          ;printf(%x, n)
+    36 00000021 FF35[00000000]                  push dword [n]
+    37 00000027 68[0A000000]                    push dword message_format
+    38 0000002C FF15[00000000]                  call [printf]
+    39 00000032 83C408                          add esp, 4*2
+    40                                          
+    41                                          ; exit(0)
+    42 00000035 6A00                            push dword 0      ; punem pe stiva parametrul pentru exit
+    43 00000037 FF15[00000000]                  call [exit]       ; apelam exit pentru a incheia programul

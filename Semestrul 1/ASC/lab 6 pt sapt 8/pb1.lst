@@ -1,0 +1,88 @@
+     1                                  bits 32 
+     2                                  global start        
+     3                                  
+     4                                  extern exit               
+     5                                  import exit msvcrt.dll    
+     6                                  segment data use32 class=data
+     7 00000000 12347586CBDA4615           s dw 3412h, 8675h, 0dacbh, 1546h
+     8                                     len equ ($-s)/2 
+     9                                     d times len resd 0
+    10                                     
+    11                                  ;2. Se da un sir de cuvinte. Sa se obtina din acesta un sir de dublucuvinte,
+    12                                  ;   in care fiecare dublucuvant va contine nibble-urile despachetate pe octet 
+    13                                  ;   (fiecare cifra hexa va fi precedata de un 0), 
+    14                                  ;   aranjate crescator in interiorul dublucuvantului.
+    15                                  
+    16                                  segment code use32 class=code
+    17                                      start:
+    18 00000000 B904000000                      mov ecx, len    ; lungimea, de cate ori vrem sa facem "repeta"
+    19 00000005 E364                            jecxz final
+    20 00000007 BE[00000000]                    mov esi, s      ; sirul s
+    21 0000000C BF[08000000]                    mov edi, d      ; rezultatul de dublucuvinte
+    22 00000011 FC                              cld             ; incepem de la stanga la dreapta
+    23                                          
+    24                                          repeta:
+    25                                          
+    26                                              ; izolam fiecare cifra in cate un registru (bl, bh, dl, dh)
+    27 00000012 66AD                                lodsw                   
+    28 00000014 88C3                                mov bl, al              ; bl
+    29 00000016 80E30F                              and bl, 0000_1111b
+    30 00000019 88C7                                mov bh, al              ; bh
+    31 0000001B 80E7F0                              and bh, 1111_0000b
+    32 0000001E C0EF04                              shr bh, 4
+    33 00000021 88E2                                mov dl, ah              ; dl
+    34 00000023 80E20F                              and dl, 0000_1111b
+    35 00000026 88E6                                mov dh, ah              ; dh
+    36 00000028 80E6F0                              and dh, 1111_0000b 
+    37 0000002B C0EE04                              shr dh, 4   
+    38                                              
+    39                                              ; facem comparari pentru ordonare
+    40                                              ; comparam fiecare registru cu fiecare registru
+    41                                              ; la final vrem sa fie: bl, bh, dl, dh
+    42 0000002E 38DF                                cmp bh, bl          ; comparam bl cu bh 
+    43 00000030 7602                                jna step1            ; daca bl e mai mare sarim la urmatorul pas: (bh<bl), adica cum ne dorim
+    44 00000032 86DF                                xchg bl, bh         ; interschimbam pozitiile
+    45                                              
+    46                                              step1:
+    47 00000034 38DA                                cmp dl, bl          ; comparam bl cu dl
+    48 00000036 7602                                jna step2 
+    49 00000038 86DA                                xchg bl, dl 
+    50                                              
+    51                                              step2:
+    52 0000003A 38DE                                cmp dh, bl          ; comparam bl cu dh
+    53 0000003C 7602                                jna step3
+    54 0000003E 86DE                                xchg bl, dh 
+    55                                              
+    56                                              step3:
+    57 00000040 38FA                                cmp dl, bh        ; comparam bh cu dl
+    58 00000042 7602                                jna step4
+    59 00000044 86FA                                xchg bh, dl 
+    60                                              
+    61                                              step4:
+    62 00000046 38FE                                cmp dh, bh          ; comparam bh cu dh
+    63 00000048 7602                                jna step5 
+    64 0000004A 86FE                                xchg bh, dh 
+    65                                              
+    66                                              step5:              
+    67 0000004C 38D6                                cmp dh, dl          ; comparam  dl cu dh
+    68 0000004E 7602                                jna gata
+    69 00000050 86D6                                xchg dl, dh         
+    70                                              
+    71                                              gata:       ; gata, cifrele sunt ordonate
+    72                                              
+    73                                              ;creem in eax dublucuvantul sub forma 0_bl_0_bh_0_dl_0_dh
+    74 00000052 B800000000                          mov eax, 0
+    75 00000057 00D8                                add al, bl 
+    76 00000059 C1E008                              shl eax, 8
+    77 0000005C 00F8                                add al, bh
+    78 0000005E C1E008                              shl eax, 8
+    79 00000061 00D0                                add al, dl 
+    80 00000063 C1E008                              shl eax, 8
+    81 00000066 00F0                                add al, dh       
+    82                                              
+    83 00000068 AB                                  stosd       
+    84 00000069 E2A7                            loop repeta     ; repetam pentru fiecare word in parte
+    85                                          
+    86                                          final:
+    87 0000006B 6A00                            push    dword 0      
+    88 0000006D FF15[00000000]                  call    [exit]

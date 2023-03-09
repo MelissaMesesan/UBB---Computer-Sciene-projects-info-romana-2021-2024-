@@ -1,0 +1,56 @@
+     1                                  bits 32
+     2                                  global start
+     3                                  extern exit
+     4                                  import exit msvcrt.dll
+     5                                  
+     6                                  segment data use32 class=data
+     7 00000000 32147586BCAD                w dw 1432h, 8675h, 0ADBCh
+     8                                      lenw equ ($-w)/2
+     9 00000006 00000000<rept>              d times lenw dd 0
+    10 00000012 00000000                    help db 0,0,0,0
+    11                                      
+    12                                      
+    13                                  segment code use32 class=code
+    14                                      start:
+    15 00000000 B903000000                      mov ecx,lenw  
+    16 00000005 FC                              CLD     ; parsing from left to right
+    17 00000006 BE[00000000]                    mov esi,w       ; esi contains the words from w
+    18 0000000B BF[06000000]                    mov edi,d
+    19                                          repeat1:
+    20 00000010 66AD                                lodsw   ;AX:= the current word from string 
+    21                                                      ;AH:= 14, AL:= 32
+    22                                              
+    23 00000012 88E3                                mov bl,ah
+    24 00000014 C0EB04                              shr bl,4    ; BL:=0000 and the rest of bl ex 14h -> 01h 
+    25 00000017 88DE                                mov dh,bl   ; DH:=0000 and the rest of bl ex 14h -> 01h
+    26                                              
+    27 00000019 88E3                                mov bl,ah
+    28 0000001B C0E304                              shl bl,4    ; BL:= the first byte and 0000 ex 14h -> 10h
+    29 0000001E C0C304                              rol bl,4    ; BL:= 0000 and the first byte  ex 10h -> 01h
+    30 00000021 88DA                                mov dl,bl    ; DL:= 0000 and the first byte ex 14h -> 01h
+    31                                              
+    32 00000023 88C3                                mov bl,al
+    33 00000025 C0EB04                              shr bl,4    ; BL:=0000 and the rest of bl ex 32h -> 03h
+    34 00000028 88DC                                mov ah,bl   ; AL:=0000 and the rest of bl ex 32h -> 03h
+    35                                              
+    36 0000002A 88C3                                mov bl,al
+    37 0000002C C0E304                              shl bl,4    ; BL:= the first byte and 0000 ex 32h -> 20h
+    38 0000002F C0C304                              rol bl,4    ; BL:= 0000 and the first byte  ex 20h -> 02h
+    39 00000032 88D8                                mov al,bl   ; AL:= 0000 and the first byte ex 32h -> 02h
+    40                                  
+    41                                              
+    42 00000034 6652                                push dx
+    43 00000036 6650                                push ax
+    44 00000038 58                                  pop  eax
+    45                                              
+    46 00000039 AB                                  stosd   ;EDI:=EAX 
+    47                                              
+    48 0000003A E2D4                            loop repeat1
+    49                                  
+    50                                              
+    51                                              
+    52                                                  
+    53 0000003C 6A00                        push dword 0
+    54 0000003E FF15[00000000]              call [exit]
+    55                                      
+    56                                      ; exit loop does not work 

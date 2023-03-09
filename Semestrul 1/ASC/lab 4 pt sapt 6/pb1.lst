@@ -1,0 +1,66 @@
+     1                                  bits 32 
+     2                                  
+     3                                  global start        
+     4                                  
+     5                                  extern exit               
+     6                                  import exit msvcrt.dll    
+     7                                  
+     8                                  segment data use32 class=data
+     9                                  
+    10                                  ; 16.
+    11                                      ;Se dau octetul A si cuvantul B. Sa se obtina dublucuvantul C:
+    12                                      ;bitii 0-7 ai lui C au valoarea 1
+    13                                      ;bitii 8-11 ai lui C coincid cu bitii 4-7 ai lui A
+    14                                      ;bitii 12-19 coincid cu bitii 2-9 ai lui B
+    15                                      ;bitii 20-23 coincid cu bitii 0-3 ai lui A
+    16                                      ;bitii 24-31 coincid cu octetului high din cuvantul B
+    17                                      
+    18 00000000 9F                          a db 9fh
+    19 00000001 9AAF                        b dw 0af9ah
+    20 00000003 00000000                    c dd 0    ;affe 69ff
+    21                                      
+    22                                  segment code use32 class=code
+    23                                      start:
+    24                                      
+    25 00000000 BB00000000                  mov ebx, 0                   ; formam cuvantul c in ebx
+    26                                      
+    27                                      ; - bitii 0-7 ai lui C au valoarea 1
+    28                                      
+    29 00000005 81CBFF000000                or ebx, 0000000011111111b
+    30                                      
+    31                                      ; - bitii 8-11 ai lui C coincid cu bitii 4-7 ai lui A
+    32                                      
+    33 0000000B B800000000                  mov eax, 0
+    34 00000010 A0[00000000]                mov al, [a]                 ; al = a
+    35 00000015 25F0000000                  and eax, 11110000b          ; se izoleaza bitii 4-7 a lui A
+    36 0000001A C1C004                      rol eax, 4                  ; deplasare la stanga cu 3 biti
+    37 0000001D 09C3                        or ebx, eax                 ; concatenare
+    38                                      
+    39                                      ;bitii 12-19 coincid cu bitii 2-9 ai lui B
+    40                                      
+    41 0000001F B800000000                  mov eax, 0
+    42 00000024 66A1[01000000]              mov ax, [b]                 ; ax = b
+    43 0000002A 25FC030000                  and eax, 0000001111111100b  ; se izoleaza bitii 2-9 a lui B
+    44 0000002F C1C00A                      rol eax, 10                  ; deplasare la stanga cu 3 biti
+    45 00000032 09C3                        or ebx, eax                 ; concatenare
+    46                                      
+    47                                      ;bitii 20-23 coincid cu bitii 0-3 ai lui A
+    48                                      
+    49 00000034 B800000000                  mov eax, 0
+    50 00000039 A0[00000000]                mov al, [a]                 ; al = a
+    51 0000003E 83E00F                      and eax, 00001111b          ; se izoleaza bitii 0-3 a lui A
+    52 00000041 C1C014                      rol eax, 20                 ; deplasare la stanga cu 10 biti
+    53 00000044 09C3                        or ebx, eax                 ; concatenare
+    54                                      
+    55                                      ;bitii 24-31 coincid cu octetului high (4-7) din cuvantul B
+    56                                      
+    57 00000046 B800000000                  mov eax, 0
+    58 0000004B 66A1[01000000]              mov ax, [b]                 ; ax = b
+    59 00000051 2500FF0000                  and eax, 1111111100000000b  ; se izoleaza octetul hign din B 
+    60 00000056 C1C010                      rol eax, 16                 ; se deplaseaza la stanga cu 24 biti
+    61 00000059 09C3                        or ebx, eax                 ; concatenare
+    62                                      
+    63                                      ; rezultatul in ebx ( dublul cuvantul C se afla in ebx )
+    64                                      
+    65 0000005B 6A00                            push    dword 0      
+    66 0000005D FF15[00000000]                  call    [exit]       

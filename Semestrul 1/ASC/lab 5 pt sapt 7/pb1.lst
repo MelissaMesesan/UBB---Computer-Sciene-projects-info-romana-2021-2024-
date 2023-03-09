@@ -1,0 +1,37 @@
+     1                                  bits 32 
+     2                                  
+     3                                  global start        
+     4                                  
+     5                                  extern exit               
+     6                                  import exit msvcrt.dll    
+     7                                  
+     8                                  segment data use32 class=data
+     9                                  
+    10                                  ; 1. Se da un sir de octeti S de lungime l. 
+    11                                  ;    Sa se construiasca sirul D de lungime l-1 astfel incat 
+    12                                  ;    elementele din D sa reprezinte produsul 
+    13                                  ;    dintre fiecare 2 elemente consecutive S(i) si S(i+1) din S.
+    14                                  
+    15 00000000 01020304                    s db 1, 2, 3, 4
+    16                                      l equ $-s-1           ; stabilirea lungimii initiale a sirului l
+    17 00000004 0000<rept>                  d times l-1 dw 0      ; rezervarea unui spatiu de dimensiune l-1 pentru sirul destinatie d si initializarea acestuia
+    18                                  
+    19                                  segment code use32 class=code
+    20                                      start:
+    21                                      
+    22 00000000 B903000000                      mov ecx, l  ; ecx primeste lungimea pentru a putea face loop de ecx ori
+    23 00000005 BE00000000                      mov esi, 0
+    24 0000000A E318                            jecxz Sfarsit
+    25                                          Repeta:
+    26 0000000C 8A86[00000000]                      mov al, [s+esi]     ; primul numar
+    27 00000012 8A9E[01000000]                      mov bl, [s+1+esi]   ; al doilea numar    
+    28 00000018 F6E3                                mul bl              ; inmultire intre primul si al doilea element
+    29 0000001A 668986[04000000]                    mov [d+esi], ax     ; rezultatul
+    30 00000021 46                                  inc esi
+    31 00000022 E2E8                            loop Repeta
+    32                                          
+    33                                          Sfarsit     ; se termina programul
+    33          ******************       warning: label alone on a line without a colon might be in error [-w+orphan-labels]
+    34                                      
+    35 00000024 6A00                            push    dword 0      
+    36 00000026 FF15[00000000]                  call    [exit]       

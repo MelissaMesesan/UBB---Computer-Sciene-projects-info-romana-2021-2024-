@@ -1,0 +1,154 @@
+     1                                  bits 32 
+     2                                  
+     3                                  global start        
+     4                                  
+     5                                  
+     6                                  extern exit, fopen, fclose, fread, printf
+     7                                  import exit msvcrt.dll 
+     8                                  import fopen msvcrt.dll 
+     9                                  import fread msvcrt.dll 
+    10                                  import fclose msvcrt.dll 
+    11                                  import printf msvcrt.dll
+    12                                  
+    13                                  
+    14                                  segment data use32 class=data
+    15 00000000 696E7075742E747874-         nume_fisier db "input.txt", 0   ; numele fisierului
+    15 00000009 00                 
+    16 0000000A 7200                        mod_acces db "r", 0             ; r for reading
+    17 0000000C FFFFFFFF                    descriptor_fis dd -1            ; identificatoruk
+    18 00000010 00000000                    nr_car_citite dd 0              ; numarul de caractere pe care le citip la un pas
+    19                                      len equ 100                     ; numarul maxim de elemente citite din fisier intr-o etapa
+    20 00000014 <res 00000064>              buffer resb len                 ; sirul in care se va citi textul din fisier
+    21 00000078 416D20636974697420-         format db "Am citit %d caractere din fisier. Textul e: %s ",10, 0
+    21 00000081 256420636172616374-
+    21 0000008A 6572652064696E2066-
+    21 00000093 69736965722E205465-
+    21 0000009C 7874756C20653A2025-
+    21 000000A5 73200A00           
+    22 000000A9 4C6974657261206D61-         format_final db "Litera mare e: %c si apare de %d ori", 0
+    22 000000B2 726520653A20256320-
+    22 000000BB 736920617061726520-
+    22 000000C4 6465202564206F7269-
+    22 000000CD 00                 
+    23 000000CE FF                          character db 0FFh
+    24                                      len2 equ 256
+    25 000000CF <res 00000100>              ascii_table resb len2
+    26 000001CF 00000000                    final_character dd 0
+    27 000001D3 00000000                    nr_final dd 0
+    28 000001D7 00                          nr db 0 
+    29 000001D8 256300                      format_test db "%c", 0
+    30                                      
+    31                                      ;Se da un fisier text. 
+    32                                      ;Sa se citeasca continutul fisierului, sa se determine litera mare (uppercase) 
+    33                                      ;cu cea mai mare frecventa si sa se afiseze acea litera, impreuna cu frecventa acesteia. 
+    34                                      ;Numele fisierului text este definit in segmentul de date.
+    35                                  
+    36                                  segment code use32 class=code
+    37                                      start:
+    38                                          
+    39                                          ; eax = fopen(nume_fisier, mod_acces)
+    40 00000000 68[0A000000]                    push dword mod_acces
+    41 00000005 68[00000000]                    push dword nume_fisier
+    42 0000000A FF15[00000000]                  call [fopen]
+    43 00000010 83C408                          add esp, 4*2
+    44                                          
+    45                                          ; verificam daca fisierul e gol
+    46 00000013 83F800                          cmp eax, 0                  
+    47 00000016 0F84CF000000                    je final
+    48                                          
+    49 0000001C A3[0C000000]                    mov [descriptor_fis], eax   ; textul e salvat in descriptor_fis
+    50                                          
+    51                                  
+    52                                          bucla:
+    53                                              ; citim 100 de caractere odata
+    54                                              ; eax = fread(buffer, 1, len, descriptor_fis)
+    55 00000021 FF35[0C000000]                      push dword [descriptor_fis]
+    56 00000027 6A64                                push dword len
+    57 00000029 6A01                                push dword 1
+    58 0000002B 68[14000000]                        push dword buffer
+    59 00000030 FF15[00000000]                      call [fread]
+    60 00000036 83C410                              add esp, 4*4
+    61                                              
+    62                                              ; eax = numarul de biti pe care ii citim
+    63 00000039 83F800                              cmp eax, 0          ; daca numarul e 0 ne oprim si verificam frecventa
+    64 0000003C 7454                                je frequency
+    65                                  
+    66 0000003E A3[10000000]                        mov [nr_car_citite], eax        ; salvam numarul de caractere in nr_car_citite
+    67                                              
+    68                                              ; procesarea caracterelor:
+    69                                              ; ascii_table = frequency array with 256 bytes(1byte = 1ascii character) 
+    70 00000043 B900000000                          mov ecx, 0
+    71 00000048 8B0D[10000000]                      mov ecx, [nr_car_citite]
+    72 0000004E BA00000000                          mov edx, 0
+    73                                  
+    74                                              start_loop2:
+    75                                                  ;luam ficare caracter si adaugam 1 la pozitia din tabelul ascii
+    76 00000053 8A9A[14000000]                          mov bl,[buffer+edx]
+    77 00000059 881D[CE000000]                          mov [character], bl
+    78 0000005F 42                                      inc edx
+    79                                                  ;transformam caracterul in dword
+    80 00000060 B700                                    mov bh, 0
+    81 00000062 6A00                                    push 0
+    82 00000064 6653                                    push bx
+    83 00000066 5B                                      pop ebx
+    84                                                  ;punem frecventa
+    85 00000067 8A83[CF000000]                          mov al, [ascii_table+ebx]
+    86 0000006D FEC0                                    inc al
+    87 0000006F 8883[CF000000]                          mov [ascii_table+ebx],al
+    88                                                  ;loop'ul se opreste cand s-au citit toate caracterele
+    89 00000075 E2DC                                loop start_loop2
+    90                                              
+    91                                              ;verificam daca textul a fost citit bine dupa nr de caractere
+    92 00000077 68[14000000]                        push dword buffer
+    93 0000007C FF35[10000000]                      push dword [nr_car_citite]
+    94 00000082 68[78000000]                        push dword format
+    95 00000087 FF15[00000000]                      call [printf]
+    96 0000008D 83C40C                              add esp, 4*3
+    97                                              
+    98                                              ; facem iar bucla sa vedem daca s-au citit toate caracterele
+    99 00000090 EB8F                                jmp bucla
+   100                                          
+   101                                          ; dupa ce am trecut prin toate testele verificam frecventa maxima a literei maxime
+   102                                          frequency:
+   103 00000092 B900010000                          mov ecx, 256
+   104 00000097 B700                                mov bh, 0
+   105 00000099 BA00000000                          mov edx, 0
+   106                                              start_loop:
+   107 0000009E 8A9A[CF000000]                          mov bl,[ascii_table+edx] ;bl = de cate ori apare litera
+   108                                                                           ;daca bl e 0 trecem peste
+   109                                                                           ;verificam aca e litera mare
+   110 000000A4 80FB00                                  cmp bl, 0
+   111 000000A7 7419                                    je is_zero
+   112                                                  
+   113 000000A9 83FA5A                                  cmp edx, 'Z' ; if A <= character <= Z
+   114 000000AC 7E00                                    jle found_big_letter
+   115                                                  
+   116                                                  
+   117                                                  found_big_letter:
+   118                                                      ;daca e litera mare, atunci verificam daca are frecventa maxima sau nu
+   119 000000AE 3A1D[D3010000]                              cmp bl, [nr_final]
+   120 000000B4 7E0C                                        jle ignore_if_not_more
+   121 000000B6 8915[CF010000]                              mov [final_character], edx
+   122 000000BC 881D[D3010000]                              mov [nr_final], bl
+   123                                                      ignore_if_not_more:
+   124                                                  is_zero:
+   125 000000C2 42                                      inc edx
+   126 000000C3 E2D9                                loop start_loop
+   127                                        
+   128                                  
+   129                                          ;afisam litera si frecventa
+   130 000000C5 FF35[D3010000]                  push dword [nr_final]
+   131 000000CB FF35[CF010000]                  push dword [final_character]
+   132 000000D1 68[A9000000]                    push dword format_final
+   133 000000D6 FF15[00000000]                  call [printf]
+   134                                          
+   135                                          ; inchidem fisierul
+   136                                          ; fclose(descriptor_fis)
+   137 000000DC FF35[0C000000]                  push dword [descriptor_fis]
+   138 000000E2 FF15[00000000]                  call [fclose]
+   139 000000E8 83C404                          add esp, 4
+   140                                          
+   141                                        final:  
+   142                                          ; exit(0)
+   143 000000EB 6A00                            push    dword 0      
+   144 000000ED FF15[00000000]                  call    [exit]       

@@ -1,0 +1,82 @@
+     1                                  bits 32 
+     2                                  
+     3                                  global start        
+     4                                  
+     5                                  extern exit, fopen, fread, printf, fclose
+     6                                  import exit msvcrt.dll   
+     7                                  import fopen msvcrt.dll
+     8                                  import fread msvcrt.dll
+     9                                  import printf msvcrt.dll
+    10                                  import fclose msvcrt.dll
+    11                                  
+    12                                  
+    13                                  
+    14                                  segment data use32 class=data
+    15 00000000 4E756D6172756C2064-         output_format db "Numarul de litere mari este: %u", 0
+    15 00000009 65206C697465726520-
+    15 00000012 6D6172692065737465-
+    15 0000001B 3A20257500         
+    16 00000020 696E7075742E747874-         input_file_name db "input.txt", 0
+    16 00000029 00                 
+    17 0000002A 7200                        acces_mode db "r", 0
+    18 0000002C <res 00000004>              file_descriptor resd 1
+    19 00000030 00000000                    contor_max dd 0
+    20                                      
+    21                                      max_length equ 100
+    22 00000034 <res 00000004>              actual_length resd 1
+    23 00000038 <res 00000064>              input_text resb max_length
+    24                                     
+    25                                  segment code use32 class=code
+    26                                      start:
+    27                                          
+    28                                      ;fopen(input_file_name, acces_mode)
+    29 00000000 68[2A000000]                    push acces_mode
+    30 00000005 68[20000000]                    push input_file_name
+    31 0000000A FF15[00000000]                  call [fopen]
+    32 00000010 83C408                          add esp, 4 * 2
+    33 00000013 A3[2C000000]                    mov dword[file_descriptor], eax
+    34 00000018 83F800                          cmp eax, 0
+    35 0000001B 745D                            je end_program
+    36                                          
+    37                                      ;fread(input_text, 1, max_length, file_descriptor)
+    38 0000001D FF35[2C000000]                  push dword[file_descriptor]
+    39 00000023 6A64                            push max_length
+    40 00000025 6A01                            push 1
+    41 00000027 68[38000000]                    push input_text
+    42 0000002C FF15[00000000]                  call [fread]
+    43 00000032 83C410                          add esp, 4 * 4
+    44 00000035 A3[34000000]                    mov dword[actual_length], eax
+    45                                      
+    46                                      ;numaram cate litere mari sunt
+    47                                      ;literele mari au codul ascii cuprins intre 65-90
+    48 0000003A 8B0D[34000000]                  mov ecx, dword[actual_length]
+    49 00000040 BE[38000000]                    mov esi, input_text
+    50 00000045 FC                              cld
+    51                                          fiecare_litera:
+    52 00000046 AC                                  lodsb
+    53                                              ;verificam daca in al e litera mare
+    54 00000047 3C41                                cmp al, 65
+    55 00000049 720A                                jb nu_e_litera_mare
+    56 0000004B 3C5A                                cmp al, 90
+    57 0000004D 7600                                jbe e_litera_mare
+    58                                                      
+    59                                              e_litera_mare:
+    60 0000004F FF05[30000000]                          inc dword[contor_max]
+    61                                                  
+    62                                              nu_e_litera_mare:
+    63 00000055 E2EF                                    loop fiecare_litera
+    64                                      
+    65                                      ;printf("Numarul de litere este: %u", contor_max)
+    66 00000057 FF35[30000000]                  push dword[contor_max]
+    67 0000005D 68[00000000]                    push dword output_format
+    68 00000062 FF15[00000000]                  call [printf]
+    69 00000068 83C408                          add esp, 4 * 2
+    70                                      
+    71                                      ;fclose(file_descriptor)
+    72 0000006B FF35[2C000000]                  push dword [file_descriptor]
+    73 00000071 FF15[00000000]                  call [fclose]
+    74 00000077 83C404                          add esp, 4 * 1
+    75                                          
+    76                                      end_program:
+    77 0000007A 6A00                        push    dword 0
+    78 0000007C FF15[00000000]              call    [exit]
