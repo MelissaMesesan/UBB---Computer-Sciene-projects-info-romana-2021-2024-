@@ -2,32 +2,32 @@
 Hello! Here is my work and resources from Babes-Bolyai University, Computer Science :)
 
 __First Semester:__
-  - Computing Systems Arhitecture -- Asambly
-  - Funfamentals of Programming -- Python
+  - Computing Systems Architecture -- Assembly
+  - Fundamentals of Programming -- Python
   - Computational Logic
   - Mathematical Analysis
-  - Mathematical Algebra
+  - Algebra
 
 
 __Second Semester:__
   - OOP -- C++
   - Graph Algorithms -- C++
   - Data Structures and Algorithms -- C++
-  - Operating Sistems -- Linux & C
-  - Dinamic Sistems -- SageMath
-  - Geomery
+  - Operating Systems -- Linux & C
+  - Dynamic Systems -- SageMath
+  - Geometry
 
 __Third Semester:__
-  - Advanced Programming Methods -- Java
-  - DataBases -- SQL
-  - Computer Network -- Final project in CISCO
-  - Logical and Functional Programming -- Prolog & Lisp
+  - Advanced Programming Techniques -- Java
+  - Databases -- SQL
+  - Computer Networks -- Final project in CISCO
+  - Logical and Functional Programming Languages -- Prolog & Lisp
   - Probabilities and Statistics -- Octave
 
 __Fourth Semester:__
   - Artificial Intelligence -- Python
   - Design and Programming Environments -- Java & C#
-  - Database Management Sysyems -- C# & SQL
+  - Database Management Systems -- C# & SQL
   - Web Programming -- HTML & CSS & PHP etc
   - Software Systems Engineering
 
