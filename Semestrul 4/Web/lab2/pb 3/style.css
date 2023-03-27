@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Stilizare pentru header */
+header {
+    background-color: red;
+    height: 100px;
+    padding: 20px;
+}
+
+/* Stilizare pentru meniu */
+nav {
+    background-color: yellow;
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+nav li {
+    margin-right: 10px;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+/* Stilizare pentru zona principala de continut */
+main {
+    background-color: green;
+    min-height: calc(100vh - 185px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Stilizare pentru footer */
+footer {
+    background-color: pink;
+    height: 60px;
+    /*position: absolute;*/
+    padding: 20px;
+    bottom: 0;
+    /*width: 100%;*/
+}
+
+/* Stilizare pentru scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+}
+
+::-webkit-scrollbar-track {
+    background-color: lightgray;
+}
