@@ -1,0 +1,21 @@
+EASY TEST
+solutie:
+Chromosome: [1, 2, 3, 4] has fit: 14.
+Chromosome: [3, 4, 1, 2] has fit: 14.
+Chromosome: [3, 2, 1, 4] has fit: 14.
+Chromosome: [2, 3, 4, 1] has fit: 14.
+Chromosome: [4, 1, 2, 3] has fit: 14.
+Chromosome: [2, 1, 4, 3] has fit: 14.
+Chromosome: [1, 4, 3, 2] has fit: 14.
+Chromosome: [4, 3, 2, 1] has fit: 14.
+There are 8 solutions with fit 14 .
+
+cel mai scurt drum:
+Chromosome: [2, 1, 4] has fit: 20
+
+MEDIUM TEST
+solutie:
+Chromosome: [56, 48, 121, 75, 82, 109, 52, 23, 14, 61, 79, 18, 1, 96, 106, 12, 43, 78, 65, 72, 45, 83, 128, 2, 115, 38, 54, 127, 118, 31, 84, 125, 102, 124, 28, 112, 110, 69, 81, 34, 85, 113, 49, 32, 63, 39, 111, 21, 41, 26, 91, 8, 15, 126, 29, 122, 114, 7, 6, 27, 101, 17, 24, 100, 76, 37, 13, 22, 9, 107, 44, 30, 80, 11, 98, 99, 67, 95, 93, 16, 51, 10, 46, 97, 42, 19, 94, 104, 71, 5, 64, 47, 59, 58, 66, 40, 33, 105, 53, 123, 50, 3, 108, 103, 89, 90, 35, 74, 88, 92, 36, 55, 25, 57, 117, 70, 116, 62, 77, 68, 119, 86, 60, 87, 20, 4, 120, 73] has fit: 143306.
+
+cel mai scurt drum:
+Chromosome: [11, 42, 27, 19] has fit: 4014
